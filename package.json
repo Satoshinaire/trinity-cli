@@ -1,0 +1,15 @@
+{
+  "name": "trinity-cli",
+  "version": "0.0.1",
+  "description": "",
+  "main": "trinity.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com-satoshinaire:Satoshinaire/trinity-cli.git"
+  },
+  "author": "Satoshinaire",
+  "license": "MIT"
+}
