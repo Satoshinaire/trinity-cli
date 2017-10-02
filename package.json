@@ -11,5 +11,12 @@
     "url": "git@github.com-satoshinaire:Satoshinaire/trinity-cli.git"
   },
   "author": "Satoshinaire",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "chalk": "^2.1.0",
+    "configstore": "^3.1.1",
+    "neon-js": "git+https://github.com/CityOfZion/neon-js.git",
+    "q": "^1.5.0",
+    "vorpal": "^1.12.0"
+  }
 }
