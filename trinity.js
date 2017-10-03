@@ -23,26 +23,26 @@ trinity
   .command('wallet create', 'Creates a new wallet address.')
   .action(function (args, cb) {
     let self = this
-    wallet.walletCreate(self, args, cb)
+    wallet.create(self, args, cb)
   })
 
 trinity
   .command('wallet list', 'List available wallets.')
   .action(function (args, cb) {
     let self = this
-    wallet.walletList(self, args, cb)
+    wallet.list(self, args, cb)
   })
 
 trinity
   .command('wallet remove <address>', 'Remove the specified wallet from local storage.')
   .action(function (args, cb) {
     let self = this
-    wallet.walletRemove(self, args, cb)
+    wallet.remove(self, args, cb)
   })
 
 trinity
   .command('wallet clear', 'Purge all wallet information from local storage.')
   .action(function (args, cb) {
     let self = this
-    wallet.walletClear(self, args, cb)
+    wallet.clear(self, args, cb)
   })
