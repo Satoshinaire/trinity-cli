@@ -4,13 +4,12 @@
 
 const pkg = require('./package.json')
 const Configstore = require('configstore')
+const defaultConfig = require('./defaultConfig')
 const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
 const wallet = require('./lib/wallet')
 
-const conf = new Configstore(pkg.name, {
-  addresses: []
-})
+const conf = new Configstore(pkg.name, defaultConfig)
 
 const trinity = Vorpal()
   .delimiter(chalk.green('trinity >'))

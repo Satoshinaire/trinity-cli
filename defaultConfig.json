@@ -1,0 +1,13 @@
+{
+  "networks": [
+    {
+      "name": "TestNet",
+      "active": false
+    },
+    {
+      "name": "MainNet",
+      "active": true
+    }
+  ],
+  "addresses": []
+}
