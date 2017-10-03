@@ -8,11 +8,12 @@ const defaultConfig = require('./defaultConfig')
 const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
 const wallet = require('./lib/wallet')
+const network = require('./lib/network')
 
 const conf = new Configstore(pkg.name, defaultConfig)
 
 const trinity = Vorpal()
-  .delimiter(chalk.green('trinity >'))
+  .delimiter(chalk.dim.green('[' + network.get() + '] ') + chalk.green('trinity') + chalk.green(' >'))
   .history('trinity-command-history')
   .show()
 
@@ -44,4 +45,11 @@ trinity
   .action(function (args, cb) {
     let self = this
     wallet.clear(self, args, cb)
+  })
+
+trinity
+  .command('network', 'Switch to a different network.')
+  .action(function (args, cb) {
+    let self = this
+    network.set(self, args, cb)
   })
