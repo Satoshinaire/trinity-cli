@@ -16,6 +16,7 @@
   "author": "Satoshinaire",
   "license": "MIT",
   "dependencies": {
+    "as-table": "^1.0.27",
     "chalk": "^2.1.0",
     "configstore": "^3.1.1",
     "neon-js": "git+https://github.com/CityOfZion/neon-js.git",
