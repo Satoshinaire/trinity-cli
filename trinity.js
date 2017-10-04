@@ -34,6 +34,13 @@ trinity
   })
 
 trinity
+  .command('wallet balance', 'Select an address to show the balances for.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.showBalances(self, args, cb)
+  })
+
+trinity
   .command('wallet remove', 'Select an address to remove from local storage.')
   .action(function (args, cb) {
     let self = this
@@ -53,3 +60,8 @@ trinity
     let self = this
     network.set(self, args, cb)
   })
+
+wallet.updateBalances(trinity)
+var trinityLoop = setInterval(() => {
+  wallet.updateBalances(trinity)
+}, 15000)
