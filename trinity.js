@@ -34,7 +34,7 @@ trinity
   })
 
 trinity
-  .command('wallet remove <address>', 'Remove the specified wallet from local storage.')
+  .command('wallet remove', 'Select an address to remove from local storage.')
   .action(function (args, cb) {
     let self = this
     wallet.remove(self, args, cb)
