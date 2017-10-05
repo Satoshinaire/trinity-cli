@@ -40,12 +40,14 @@ trinity
     wallet.list(self, args, cb)
   })
 
+/*
 trinity
   .command('wallet balance', 'Select an address to show the balances for.')
   .action(function (args, cb) {
     let self = this
     wallet.showBalances(self, args, cb)
   })
+*/
 
 trinity
   .command('wallet remove', 'Select an address to remove from local storage.')
