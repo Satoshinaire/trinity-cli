@@ -27,6 +27,13 @@ trinity
   })
 
 trinity
+  .command('wallet import', 'Import an existing private key in WIF format.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.import(self, args, cb)
+  })
+
+trinity
   .command('wallet list', 'List available wallets.')
   .action(function (args, cb) {
     let self = this
