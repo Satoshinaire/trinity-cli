@@ -2,11 +2,11 @@
   "networks": [
     {
       "name": "TestNet",
-      "active": false
+      "active": true
     },
     {
       "name": "MainNet",
-      "active": true
+      "active": false
     }
   ],
   "addresses": []
