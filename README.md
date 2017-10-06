@@ -48,6 +48,7 @@ Trinity works like a command-prompt, just type `help` to get started:
     wallet create      Creates a new wallet address.
     wallet import      Import an existing private key in WIF format.
     wallet list        List available wallets.
+    wallet show        Select an address to show its balances, transactions, claimables, etc.
     wallet remove      Select an address to remove from local storage.
     wallet clear       Purge all wallet information from local storage.
     network            Switch to a different network.
