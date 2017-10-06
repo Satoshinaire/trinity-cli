@@ -11,8 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com-satoshinaire:Satoshinaire/trinity-cli.git"
+    "url": "git@github.com:Satoshinaire/trinity-cli.git"
   },
+  "bugs": {
+    "url": "https://github.com/Satoshinaire/trinity-cli/issues"
+  },
+  "homepage": "https://github.com/Satoshinaire/trinity-cli",
   "author": "Satoshinaire",
   "license": "MIT",
   "dependencies": {
