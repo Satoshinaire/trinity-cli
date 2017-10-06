@@ -51,6 +51,8 @@ Trinity works like a command-prompt, just type `help` to get started:
     wallet show        Select an address to show its balances, transactions, claimables, etc.
     wallet remove      Select an address to remove from local storage.
     wallet clear       Purge all wallet information from local storage.
+    contact list       List your contacts.
+    contact add        Add a new contact.
     network            Switch to a different network.
 ```
 
