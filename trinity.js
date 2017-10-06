@@ -9,6 +9,7 @@ const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
 const wallet = require('./lib/wallet')
 const network = require('./lib/network')
+const contacts = require('./lib/contacts')
 
 const conf = new Configstore(pkg.name, defaultConfig)
 
@@ -59,6 +60,20 @@ trinity
   .action(function (args, cb) {
     let self = this
     wallet.clear(self, args, cb)
+  })
+
+trinity
+  .command('contact list', 'List your contacts.')
+  .action(function (args, cb) {
+    let self = this
+    contacts.list(self, args, cb)
+  })
+
+trinity
+  .command('contact add', 'Add a new contact.')
+  .action(function (args, cb) {
+    let self = this
+    contacts.add(self, args, cb)
   })
 
 trinity
