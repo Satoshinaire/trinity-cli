@@ -77,6 +77,13 @@ trinity
   })
 
 trinity
+  .command('contact remove', 'Remove an existing contact.')
+  .action(function (args, cb) {
+    let self = this
+    contacts.remove(self, args, cb)
+  })
+
+trinity
   .command('network', 'Switch to a different network.')
   .action(function (args, cb) {
     let self = this
