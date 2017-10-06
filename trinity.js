@@ -20,20 +20,6 @@ const trinity = Vorpal()
 trinity.log(chalk.bold.green("\n" + ' Wake up, Neo… ' + "\n"))
 
 trinity
-  .command('wallet create', 'Creates a new wallet address.')
-  .action(function (args, cb) {
-    let self = this
-    wallet.create(self, args, cb)
-  })
-
-trinity
-  .command('wallet import', 'Import an existing private key in WIF format.')
-  .action(function (args, cb) {
-    let self = this
-    wallet.import(self, args, cb)
-  })
-
-trinity
   .command('wallet list', 'List available wallets.')
   .action(function (args, cb) {
     let self = this
@@ -45,6 +31,20 @@ trinity
   .action(function (args, cb) {
     let self = this
     wallet.show(self, args, cb)
+  })
+
+trinity
+  .command('wallet create', 'Creates a new wallet address.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.create(self, args, cb)
+  })
+
+trinity
+  .command('wallet import', 'Import an existing private key in WIF format.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.import(self, args, cb)
   })
 
 trinity
