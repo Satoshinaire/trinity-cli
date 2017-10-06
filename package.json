@@ -1,6 +1,6 @@
 {
   "name": "trinity-cli",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Trinity is a command-line wallet for the NEO Network.",
   "main": "trinity.js",
   "bin": {
