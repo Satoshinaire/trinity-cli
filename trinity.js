@@ -21,6 +21,20 @@ const trinity = Vorpal()
 trinity.log(chalk.bold.green("\n" + ' Wake up, Neo… ' + "\n"))
 
 trinity
+  .command('send neo', chalk.bold.red('[EXPERIMENTAL]') + ' Send NEO from one of your addresses to one of your contacts.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.sendNeo(self, args, cb)
+  })
+
+trinity
+  .command('send gas', chalk.bold.red('[EXPERIMENTAL]') + ' Send GAS from one of your addresses to one of your contacts.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.sendGas(self, args, cb)
+  })
+
+trinity
   .command('wallet list', 'List available wallets.')
   .action(function (args, cb) {
     let self = this
