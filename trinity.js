@@ -98,7 +98,7 @@ trinity
   })
 
 trinity
-  .command('claim gas', 'Claim all available and unavailable gas.')
+  .command('claim gas', chalk.bold.red('[EXPERIMENTAL]') + ' Claim all available and unavailable gas.')
   .action(function (args, cb) {
     let self = this
     wallet.claimAllGas(self, args, cb)
