@@ -98,6 +98,13 @@ trinity
   })
 
 trinity
+  .command('claim gas', 'Claim all available and unavailable gas.')
+  .action(function (args, cb) {
+    let self = this
+    wallet.claimAllGas(self, args, cb)
+  })
+
+trinity
   .command('network', 'Switch to a different network.')
   .action(function (args, cb) {
     let self = this
