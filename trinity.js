@@ -114,4 +114,5 @@ trinity
 wallet.updateBalances(trinity)
 var trinityLoop = setInterval(() => {
   wallet.updateBalances(trinity)
+  wallet.updateClaimables(trinity)
 }, 5000)
