@@ -98,6 +98,13 @@ trinity
   })
 
 trinity
+  .command('contact clear', 'Purge all contact information from local storage.')
+  .action(function (args, cb) {
+    let self = this
+    contacts.clear(self, args, cb)
+  })
+
+trinity
   .command('claim gas', chalk.bold.red('[EXPERIMENTAL]') + ' Claim all available and unavailable gas.')
   .action(function (args, cb) {
     let self = this
