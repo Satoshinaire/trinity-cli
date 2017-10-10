@@ -56,6 +56,7 @@ Trinity works like a command-prompt, just type `help` to get started:
     contact list       List your contacts.
     contact add        Add a new contact.
     contact remove     Remove an existing contact.
+    claim gas          [EXPERIMENTAL] Claim all available and unavailable gas.
     network            Switch to a different network.
 ```
 
