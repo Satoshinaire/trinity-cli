@@ -7,6 +7,16 @@ const Configstore = require('configstore')
 const defaultConfig = require('./defaultConfig')
 const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
+
+const winston = require('winston')
+
+winston
+  .add(winston.transports.File, {
+    filename: 'trinity.log',
+    level: 'debug'
+  })
+  .remove(winston.transports.Console)
+
 const wallet = require('./lib/wallet')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
