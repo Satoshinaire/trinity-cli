@@ -168,6 +168,27 @@ trinity
     network.set(self, args, cb)
   })
 
+trinity
+  .command('version', 'Show Trinity version information.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+
+    let output = "\n"
+    output += chalk.bold.green('Trinity v' + pkg.version) + "\n"
+    output += chalk.green(pkg.description) + "\n"
+    output += chalk.green(pkg.homepage) + "\n"
+    output += "\n"
+    output += chalk.green('Written by ' + pkg.author + ' and released under the ' + pkg.license + ' license.') + "\n"
+    output += chalk.green('Please report any bugs you discover to ' + pkg.bugs.url) + "\n"
+    output += "\n"
+    output += chalk.green('Uses the Neon JS library and Neon API by Ethan Fast and City of Zion (http://cityofzion.io/)') + "\n"
+
+    self.log(output)
+
+    cb()
+  })
+
 function commandHelp(args, cb) {
   let cmd = trinity.find(args)
 
