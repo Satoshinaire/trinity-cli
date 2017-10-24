@@ -8,6 +8,12 @@ const defaultConfig = require('./defaultConfig')
 const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
 
+const updateNotifier = require('update-notifier')
+let notifier = updateNotifier({
+  pkg,
+  updateCheckInterval: 1000 * 60 * 60 * 24 // 1 day
+});
+
 const winston = require('winston')
 
 let networkConnection = true
@@ -55,6 +61,8 @@ trinity.help(() => {
 })
 
 trinity.log(chalk.bold.green("\n" + ' Wake up, Neo… ' + "\n"))
+
+updateCheck(trinity, notifier)
 
 trinity
   .command('send neo', 'Send NEO from one of your addresses to one of your contacts.')
@@ -201,6 +209,18 @@ function commandHelp(args, cb) {
   result += chalk.green(' ' + cmd._description) + "\n"
 
   cb(result)
+}
+
+function updateCheck(trinity, notifier) {
+  let update = notifier.update
+
+  if (update != undefined) {
+    if (update.latest > update.current) {
+      trinity.log(chalk.bold.green(' Update available ' + update.current + ' → ' + update.latest))
+      trinity.log(chalk.green(' Run "npm install -g trinity-cli" to update'))
+      trinity.log('')
+    }
+  }
 }
 
 wallet.updateBalances(trinity)
