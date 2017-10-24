@@ -10,6 +10,8 @@ const chalk = Vorpal().chalk
 
 const winston = require('winston')
 
+let networkConnection = true
+
 winston
   .add(winston.transports.File, {
     filename: 'trinity.log',
