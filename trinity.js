@@ -30,10 +30,35 @@ const trinity = Vorpal()
   .history('trinity-command-history')
   .show()
 
+trinity.help(() => {
+  let result = ''
+  let width = 0;
+
+  result += "\n"
+  result += chalk.green(' Commands:') + "\n"
+
+  for (let command in trinity.commands) {
+    let cmd = trinity.find(trinity.commands[command]._name)
+    if (cmd._name.length > width) {
+      width = cmd._name.length
+    }
+  }
+
+  for (let command in trinity.commands) {
+    let cmd = trinity.find(trinity.commands[command]._name)
+    result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+  }
+
+  result += "\n"
+
+  return result
+})
+
 trinity.log(chalk.bold.green("\n" + ' Wake up, Neo… ' + "\n"))
 
 trinity
   .command('send neo', 'Send NEO from one of your addresses to one of your contacts.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.sendNeo(self, args, cb)
@@ -41,6 +66,7 @@ trinity
 
 trinity
   .command('send gas', 'Send GAS from one of your addresses to one of your contacts.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.sendGas(self, args, cb)
@@ -48,6 +74,7 @@ trinity
 
 trinity
   .command('wallet list', 'List available wallets.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.list(self, args, cb)
@@ -55,6 +82,7 @@ trinity
 
 trinity
   .command('wallet show', 'Select an address to show its balances, transactions, claimables, etc.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.show(self, args, cb)
@@ -62,6 +90,7 @@ trinity
 
 trinity
   .command('wallet create', 'Creates a new wallet address.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.create(self, args, cb)
@@ -69,6 +98,7 @@ trinity
 
 trinity
   .command('wallet import', 'Import an existing private key in WIF format.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.import(self, args, cb)
@@ -76,6 +106,7 @@ trinity
 
 trinity
   .command('wallet remove', 'Select an address to remove from local storage.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.remove(self, args, cb)
@@ -83,6 +114,7 @@ trinity
 
 trinity
   .command('wallet clear', 'Purge all wallet information from local storage.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.clear(self, args, cb)
@@ -90,6 +122,7 @@ trinity
 
 trinity
   .command('contact list', 'List your contacts.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     contacts.list(self, args, cb)
@@ -97,6 +130,7 @@ trinity
 
 trinity
   .command('contact add', 'Add a new contact.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     contacts.add(self, args, cb)
@@ -104,6 +138,7 @@ trinity
 
 trinity
   .command('contact remove', 'Remove an existing contact.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     contacts.remove(self, args, cb)
@@ -111,6 +146,7 @@ trinity
 
 trinity
   .command('contact clear', 'Purge all contact information from local storage.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     contacts.clear(self, args, cb)
@@ -118,6 +154,7 @@ trinity
 
 trinity
   .command('claim gas', 'Claim all available and unavailable gas.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     wallet.claimAllGas(self, args, cb)
@@ -125,10 +162,25 @@ trinity
 
 trinity
   .command('network', 'Switch to a different network.')
+  .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     network.set(self, args, cb)
   })
+
+function commandHelp(args, cb) {
+  let cmd = trinity.find(args)
+
+  let result = ''
+  let width = 0;
+
+  result += "\n"
+  result += chalk.green(' Usage: ' + cmd._name) + "\n"
+  result += "\n"
+  result += chalk.green(' ' + cmd._description) + "\n"
+
+  cb(result)
+}
 
 wallet.updateBalances(trinity)
 var trinityLoop = setInterval(() => {
