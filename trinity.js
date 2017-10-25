@@ -26,6 +26,8 @@ const winston = require('winston')
 
 let networkConnection = true
 
+let matrixState = 0
+
 winston
   .add(winston.transports.File, {
     filename: logdir + '/trinity.log',
@@ -36,6 +38,7 @@ winston
 const wallet = require('./lib/wallet')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
+const matrix = require('./lib/matrix')
 
 const conf = new Configstore(pkg.name, defaultConfig)
 
@@ -220,6 +223,15 @@ trinity
 
     cb()
   })
+
+trinity.on('keypress', (e) => {
+  if (e.key == 'x' && e.e.key.ctrl && matrixState == 0) {
+    matrixState = matrix.do(trinity, matrixState)
+  }
+  if (e.key == 'escape' && matrixState == 1) {
+    matrixState = matrix.do(trinity, matrixState)
+  }
+})
 
 function commandHelp(args, cb) {
   let cmd = trinity.find(args)
