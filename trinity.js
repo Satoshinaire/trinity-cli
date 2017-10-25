@@ -244,6 +244,24 @@ function commandHelp(args, cb) {
   result += "\n"
   result += chalk.green(' ' + cmd._description) + "\n"
 
+  if (cmd.options.length > 0) {
+    let optWidth = 0
+    result += "\n"
+    result += chalk.green(' Options:') + "\n"
+
+    for (let option in cmd.options) {
+      let opt = cmd.options[option]
+      if (opt.flags.length > optWidth) {
+        optWidth = opt.flags.length
+      }
+    }
+
+    for (let option in cmd.options) {
+      let opt = cmd.options[option]
+      result += '     ' + chalk.green(trinity.util.pad(opt.flags, optWidth)) + '    ' + chalk.green(opt.description) + "\n"
+    }
+  }
+
   cb(result)
 }
 
