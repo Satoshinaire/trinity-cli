@@ -12,7 +12,7 @@ const updateNotifier = require('update-notifier')
 let notifier = updateNotifier({
   pkg,
   updateCheckInterval: 1000 * 60 * 60 * 24 // 1 day
-});
+})
 
 const winston = require('winston')
 
@@ -38,7 +38,7 @@ const trinity = Vorpal()
 
 trinity.help(() => {
   let result = ''
-  let width = 0;
+  let width = 0
 
   result += "\n"
   result += chalk.green(' Commands:') + "\n"
@@ -201,7 +201,7 @@ function commandHelp(args, cb) {
   let cmd = trinity.find(args)
 
   let result = ''
-  let width = 0;
+  let width = 0
 
   result += "\n"
   result += chalk.green(' Usage: ' + cmd._name) + "\n"
