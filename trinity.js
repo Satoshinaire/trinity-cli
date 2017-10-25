@@ -60,7 +60,9 @@ trinity.help(() => {
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
-    result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+    if (!cmd._hidden) {
+      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+    }
   }
 
   result += "\n"
@@ -201,6 +203,20 @@ trinity
     output += chalk.green('Uses the Neon JS library and Neon API by Ethan Fast and City of Zion (http://cityofzion.io/)') + "\n"
 
     self.log(output)
+
+    cb()
+  })
+
+trinity
+  .catch('[words...]', 'Catches all unlisted commands.')
+  .hidden()
+  .action(function (args, cb) {
+    let self = this
+    let cmd = args.words.join(' ')
+
+    self.log('')
+    self.log(chalk.red(' `' + cmd + '` is not a valid Trinity command.'))
+    self.help()
 
     cb()
   })
