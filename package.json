@@ -23,8 +23,10 @@
     "as-table": "^1.0.27",
     "chalk": "^2.1.0",
     "configstore": "^3.1.1",
+    "moment": "^2.19.1",
     "neon-js": "git+https://github.com/CityOfZion/neon-js.git#1.1.0",
     "q": "^1.5.0",
+    "restify-clients": "^1.5.2",
     "update-notifier": "^2.3.0",
     "vorpal": "^1.12.0",
     "winston": "^2.4.0"

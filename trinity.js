@@ -36,6 +36,7 @@ winston
   .remove(winston.transports.Console)
 
 const wallet = require('./lib/wallet')
+const transactions = require('./lib/transactions')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
 const matrix = require('./lib/matrix')
@@ -103,10 +104,15 @@ trinity
 
 trinity
   .command('wallet show', 'Select an address to show its balances, transactions, claimables, etc.')
+  .option('-t, --transaction <txid>', 'Show details for a specific transaction ID.')
   .help(commandHelp)
   .action(function (args, cb) {
     let self = this
-    wallet.show(self, args, cb)
+    if (args.options && args.options.transaction) {
+      transactions.show(self, args, cb)
+    } else {
+      wallet.show(self, args, cb)
+    }
   })
 
 trinity
