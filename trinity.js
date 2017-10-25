@@ -7,27 +7,39 @@ const Configstore = require('configstore')
 const defaultConfig = require('./defaultConfig')
 const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
+const os = require('os')
+const fs = require('fs')
+
+const logdir = os.homedir() + '/.trinity/'
+
+if (!fs.existsSync(logdir)) {
+  fs.mkdirSync(logdir)
+}
 
 const updateNotifier = require('update-notifier')
 let notifier = updateNotifier({
   pkg,
   updateCheckInterval: 1000 * 60 * 60 * 24 // 1 day
-});
+})
 
 const winston = require('winston')
 
 let networkConnection = true
 
+let matrixState = 0
+
 winston
   .add(winston.transports.File, {
-    filename: 'trinity.log',
+    filename: logdir + '/trinity.log',
     level: 'debug'
   })
   .remove(winston.transports.Console)
 
 const wallet = require('./lib/wallet')
+const transactions = require('./lib/transactions')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
+const matrix = require('./lib/matrix')
 
 const conf = new Configstore(pkg.name, defaultConfig)
 
@@ -38,7 +50,7 @@ const trinity = Vorpal()
 
 trinity.help(() => {
   let result = ''
-  let width = 0;
+  let width = 0
 
   result += "\n"
   result += chalk.green(' Commands:') + "\n"
@@ -52,7 +64,9 @@ trinity.help(() => {
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
-    result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+    if (!cmd._hidden) {
+      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+    }
   }
 
   result += "\n"
@@ -90,10 +104,15 @@ trinity
 
 trinity
   .command('wallet show', 'Select an address to show its balances, transactions, claimables, etc.')
+  .option('-t, --transaction <txid>', 'Show details for a specific transaction ID.')
   .help(commandHelp)
   .action(function (args, cb) {
     let self = this
-    wallet.show(self, args, cb)
+    if (args.options && args.options.transaction) {
+      transactions.show(self, args, cb)
+    } else {
+      wallet.show(self, args, cb)
+    }
   })
 
 trinity
@@ -197,16 +216,57 @@ trinity
     cb()
   })
 
+trinity
+  .catch('[words...]', 'Catches all unlisted commands.')
+  .hidden()
+  .action(function (args, cb) {
+    let self = this
+    let cmd = args.words.join(' ')
+
+    self.log('')
+    self.log(chalk.red(' `' + cmd + '` is not a valid Trinity command.'))
+    self.help()
+
+    cb()
+  })
+
+trinity.on('keypress', (e) => {
+  if (e.key == 'x' && e.e.key.ctrl && matrixState == 0) {
+    matrixState = matrix.do(trinity, matrixState)
+  }
+  if (e.key == 'escape' && matrixState == 1) {
+    matrixState = matrix.do(trinity, matrixState)
+  }
+})
+
 function commandHelp(args, cb) {
   let cmd = trinity.find(args)
 
   let result = ''
-  let width = 0;
+  let width = 0
 
   result += "\n"
   result += chalk.green(' Usage: ' + cmd._name) + "\n"
   result += "\n"
   result += chalk.green(' ' + cmd._description) + "\n"
+
+  if (cmd.options.length > 0) {
+    let optWidth = 0
+    result += "\n"
+    result += chalk.green(' Options:') + "\n"
+
+    for (let option in cmd.options) {
+      let opt = cmd.options[option]
+      if (opt.flags.length > optWidth) {
+        optWidth = opt.flags.length
+      }
+    }
+
+    for (let option in cmd.options) {
+      let opt = cmd.options[option]
+      result += '     ' + chalk.green(trinity.util.pad(opt.flags, optWidth)) + '    ' + chalk.green(opt.description) + "\n"
+    }
+  }
 
   cb(result)
 }
