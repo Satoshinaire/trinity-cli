@@ -7,6 +7,14 @@ const Configstore = require('configstore')
 const defaultConfig = require('./defaultConfig')
 const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
+const os = require('os')
+const fs = require('fs')
+
+const logdir = os.homedir() + '/.trinity/'
+
+if (!fs.existsSync(logdir)) {
+  fs.mkdirSync(logdir)
+}
 
 const updateNotifier = require('update-notifier')
 let notifier = updateNotifier({
@@ -20,7 +28,7 @@ let networkConnection = true
 
 winston
   .add(winston.transports.File, {
-    filename: 'trinity.log',
+    filename: logdir + '/trinity.log',
     level: 'debug'
   })
   .remove(winston.transports.Console)
