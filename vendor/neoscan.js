@@ -2,12 +2,20 @@ const clients = require('restify-clients')
 const q = require('q')
 
 class Neoscan {
-  constructor() {
-    this.client = clients.createJsonClient({
-      url: 'https://neoscan.io',
-      version: '~1.0'
-    })
-    this.path_prefix = '/api/main_net/v1'
+  constructor(network = 'MainNet') {
+    if (network == 'MainNet') {
+      this.client = clients.createJsonClient({
+        url: 'https://neoscan.io',
+        version: '~1.0'
+      })
+      this.path_prefix = '/api/main_net/v1'
+    } else {
+      this.client = clients.createJsonClient({
+        url: 'https://neoscan-testnet.io',
+        version: '~1.0'
+      })
+      this.path_prefix = '/api/test_net/v1'
+    }
   }
 
   getInfo(type, hash) {
