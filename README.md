@@ -64,7 +64,7 @@ Trinity works like a command-prompt, just type `help` to get started:
 
 ### Demo
 
-![A quick demo of current Trinity functionality](https://i.imgur.com/OCU2eVi.gif)
+![A quick demo of current Trinity functionality](https://user-images.githubusercontent.com/30309816/32032525-6c077db8-ba53-11e7-8646-b89fbabecf0b.gif)
 
 ## License
 
