@@ -149,11 +149,27 @@ trinity
   })
 
 trinity
+  .command('token list', 'List available tokens.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    tokens.list(self, args, cb)
+  })
+
+trinity
   .command('token add', 'Add a new token hash.')
   .help(commandHelp)
   .action(function (args, cb) {
     let self = this
     tokens.add(self, args, cb)
+  })
+
+trinity
+  .command('token remove', 'Remove a token hash.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    tokens.remove(self, args, cb)
   })
 
 trinity
