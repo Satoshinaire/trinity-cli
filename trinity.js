@@ -36,6 +36,7 @@ winston
   .remove(winston.transports.Console)
 
 const wallet = require('./lib/wallet')
+const tokens = require('./lib/tokens')
 const transactions = require('./lib/transactions')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
@@ -145,6 +146,14 @@ trinity
   .action(function (args, cb) {
     let self = this
     wallet.clear(self, args, cb)
+  })
+
+trinity
+  .command('token add', 'Add a new token hash.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    tokens.add(self, args, cb)
   })
 
 trinity
@@ -285,7 +294,7 @@ function updateCheck(trinity, notifier) {
 
 wallet.updateBalances(trinity)
 var trinityLoop = setInterval(() => {
-  wallet.updateTokens(trinity)
+  tokens.update(trinity)
   wallet.updateBalances(trinity)
   wallet.updateClaimables(trinity)
 }, 5000)
