@@ -285,6 +285,7 @@ function updateCheck(trinity, notifier) {
 
 wallet.updateBalances(trinity)
 var trinityLoop = setInterval(() => {
+  wallet.updateTokens(trinity)
   wallet.updateBalances(trinity)
   wallet.updateClaimables(trinity)
 }, 5000)
