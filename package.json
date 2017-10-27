@@ -24,7 +24,7 @@
     "chalk": "^2.1.0",
     "configstore": "^3.1.1",
     "moment": "^2.19.1",
-    "neon-js": "git+https://github.com/CityOfZion/neon-js.git#e8d2b2c30c8564a1651a3785c9aa4232dc9c8529",
+    "neon-js": "git+https://github.com/CityOfZion/neon-js.git#008af6c55918fe5ca44f2c5170185d7fd778456b",
     "q": "^1.5.0",
     "restify-clients": "^1.5.2",
     "update-notifier": "^2.3.0",
