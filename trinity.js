@@ -128,10 +128,15 @@ trinity
 
 trinity
   .command('wallet import', 'Import an existing private key in WIF format.')
+  .option('-l, --ledger', 'Import address from Ledger Nano S.')
   .help(commandHelp)
   .action(function (args, cb) {
     let self = this
-    wallet.import(self, args, cb)
+    if (args.options.ledger) {
+      wallet.importLedger(self, args, cb)
+    } else {
+      wallet.import(self, args, cb)
+    }
   })
 
 trinity
