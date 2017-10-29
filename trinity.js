@@ -58,15 +58,17 @@ trinity.help(() => {
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
-    if (cmd._name.length > width) {
-      width = cmd._name.length
+    let cmdName = cmd._name + (cmd.options.length ? ' [options]' : '')
+    if (cmdName.length > width) {
+      width = cmdName.length
     }
   }
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
+    let cmdName = cmd._name + (cmd.options.length ? ' [options]' : '')
     if (!cmd._hidden) {
-      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmdName, width)) + '    ' + chalk.green(cmd._description)
     }
   }
 
