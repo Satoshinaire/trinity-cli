@@ -58,15 +58,17 @@ trinity.help(() => {
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
-    if (cmd._name.length > width) {
-      width = cmd._name.length
+    let cmdName = cmd._name + (cmd.options.length ? ' [options]' : '')
+    if (cmdName.length > width) {
+      width = cmdName.length
     }
   }
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
+    let cmdName = cmd._name + (cmd.options.length ? ' [options]' : '')
     if (!cmd._hidden) {
-      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmdName, width)) + '    ' + chalk.green(cmd._description)
     }
   }
 
@@ -126,10 +128,15 @@ trinity
 
 trinity
   .command('wallet import', 'Import an existing private key in WIF format.')
+  .option('-l, --ledger', 'Import address from Ledger Nano S.')
   .help(commandHelp)
   .action(function (args, cb) {
     let self = this
-    wallet.import(self, args, cb)
+    if (args.options.ledger) {
+      wallet.importLedger(self, args, cb)
+    } else {
+      wallet.import(self, args, cb)
+    }
   })
 
 trinity
