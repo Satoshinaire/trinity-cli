@@ -260,6 +260,14 @@ trinity
   })
 
 trinity
+  .command('trade orders', 'Get current active orders from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.orders(self, args, cb)
+  })
+
+trinity
   .command('version', 'Show Trinity version information.')
   .help(commandHelp)
   .action(function (args, cb) {
