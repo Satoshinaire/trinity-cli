@@ -1,6 +1,6 @@
 {
   "name": "trinity-cli",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Trinity is a command-line wallet for the NEO Network.",
   "main": "trinity.js",
   "bin": {
@@ -21,10 +21,13 @@
   "license": "MIT",
   "dependencies": {
     "as-table": "^1.0.27",
+    "axios": "^0.17.0",
     "chalk": "^2.1.0",
     "configstore": "^3.1.1",
+    "kucoin-api": "^0.0.3",
     "moment": "^2.19.1",
-    "neon-js": "git+https://github.com/CityOfZion/neon-js.git#1.1.0",
+    "neon-js": "git+https://github.com/CityOfZion/neon-js.git#8aac855f7f479d730d49ee68ea8a2ae7620c4333",
+    "node-hid": "^0.5.7",
     "q": "^1.5.0",
     "restify-clients": "^1.5.2",
     "update-notifier": "^2.3.0",

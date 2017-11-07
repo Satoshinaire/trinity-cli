@@ -43,23 +43,32 @@ Trinity works like a command-prompt, just type `help` to get started:
 
  Commands:
 
-    help              Provides help for a given command.
-    exit              Exits application.
-    send neo          Send NEO from one of your addresses to one of your contacts.
-    send gas          Send GAS from one of your addresses to one of your contacts.
-    wallet list       List available wallets.
-    wallet show       Select an address to show its balances, transactions, claimables, etc.
-    wallet create     Creates a new wallet address.
-    wallet import     Import an existing private key in WIF format.
-    wallet remove     Select an address to remove from local storage.
-    wallet clear      Purge all wallet information from local storage.
-    contact list      List your contacts.
-    contact add       Add a new contact.
-    contact remove    Remove an existing contact.
-    contact clear     Purge all contact information from local storage.
-    claim gas         Claim all available and unavailable gas.
-    network           Switch to a different network.
-    version           Show Trinity version information.
+    help                       Provides help for a given command.
+    exit                       Exits application.
+    send neo                   Send NEO from one of your addresses to one of your contacts.
+    send gas                   Send GAS from one of your addresses to one of your contacts.
+    wallet list                List available wallets.
+    wallet show [options]      Select an address to show its balances, transactions, claimables, etc.
+    wallet create              Creates a new wallet address.
+    wallet import [options]    Import an existing private key in WIF format.
+    wallet remove              Select an address to remove from local storage.
+    wallet clear               Purge all wallet information from local storage.
+    token list                 List available tokens.
+    token add                  Add a new token hash.
+    token remove               Remove a token hash.
+    contact list               List your contacts.
+    contact add                Add a new contact.
+    contact remove             Remove an existing contact.
+    contact clear              Purge all contact information from local storage.
+    claim gas                  Claim all available and unavailable gas.
+    network                    Switch to a different network.
+    trade [options]            Configure, lock, or unlock your KuCoin API credentials for trading.
+    trade balance              Get trading balance from KuCoin.
+    trade orders               Get current active orders from KuCoin.
+    trade create               Create a new order on KuCoin.
+    trade cancel               Cancel an order on KuCoin.
+    trade withdraw             Withdraw funds from KuCoin.
+    version                    Show Trinity version information.
 ```
 
 ### Demo

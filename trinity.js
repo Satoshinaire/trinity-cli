@@ -2,6 +2,8 @@
 
 'use strict'
 
+process.env.TRINITY_STATE = '{}'
+
 const pkg = require('./package.json')
 const Configstore = require('configstore')
 const defaultConfig = require('./defaultConfig')
@@ -9,6 +11,7 @@ const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
 const os = require('os')
 const fs = require('fs')
+const Kucoin = require('kucoin-api')
 
 const logdir = os.homedir() + '/.trinity/'
 
@@ -35,10 +38,13 @@ winston
   })
   .remove(winston.transports.Console)
 
+const g = require('./lib/global')
 const wallet = require('./lib/wallet')
+const tokens = require('./lib/tokens')
 const transactions = require('./lib/transactions')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
+const trade = require('./lib/trade')
 const matrix = require('./lib/matrix')
 
 const conf = new Configstore(pkg.name, defaultConfig)
@@ -57,15 +63,17 @@ trinity.help(() => {
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
-    if (cmd._name.length > width) {
-      width = cmd._name.length
+    let cmdName = cmd._name + (cmd.options.length ? ' [options]' : '')
+    if (cmdName.length > width) {
+      width = cmdName.length
     }
   }
 
   for (let command in trinity.commands) {
     let cmd = trinity.find(trinity.commands[command]._name)
+    let cmdName = cmd._name + (cmd.options.length ? ' [options]' : '')
     if (!cmd._hidden) {
-      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmd._name, width)) + '    ' + chalk.green(cmd._description)
+      result += chalk.green("\n" + '    ') + chalk.bold.green(trinity.util.pad(cmdName, width)) + '    ' + chalk.green(cmd._description)
     }
   }
 
@@ -125,10 +133,15 @@ trinity
 
 trinity
   .command('wallet import', 'Import an existing private key in WIF format.')
+  .option('-l, --ledger', 'Import address from Ledger Nano S.')
   .help(commandHelp)
   .action(function (args, cb) {
     let self = this
-    wallet.import(self, args, cb)
+    if (args.options.ledger) {
+      wallet.importLedger(self, args, cb)
+    } else {
+      wallet.import(self, args, cb)
+    }
   })
 
 trinity
@@ -145,6 +158,30 @@ trinity
   .action(function (args, cb) {
     let self = this
     wallet.clear(self, args, cb)
+  })
+
+trinity
+  .command('token list', 'List available tokens.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    tokens.list(self, args, cb)
+  })
+
+trinity
+  .command('token add', 'Add a new token hash.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    tokens.add(self, args, cb)
+  })
+
+trinity
+  .command('token remove', 'Remove a token hash.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    tokens.remove(self, args, cb)
   })
 
 trinity
@@ -193,6 +230,65 @@ trinity
   .action(function (args, cb) {
     let self = this
     network.set(self, args, cb)
+  })
+
+trinity
+  .command('trade', 'Configure, lock, or unlock your KuCoin API credentials for trading.')
+  .option('-c, --configure', 'Configure your KuCoin API credentials.')
+  .option('-u, --unlock', 'Unlock your KuCoin API credentials for this Trinity session.')
+  .option('-l, --lock', 'Lock your KuCoin API credentials for this Trinity session.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    if (args.options.unlock) {
+      trade.unlock(self, args, cb)
+    } else if (args.options.lock) {
+      trade.lock(self, args, cb)
+    } else if (args.options.configure) {
+      trade.config(self, args, cb)
+    } else {
+      trade.state(self, args, cb)
+    }
+  })
+
+trinity
+  .command('trade balance', 'Get trading balance from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.balance(self, args, cb)
+  })
+
+trinity
+  .command('trade orders', 'Get current active orders from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.orders(self, args, cb)
+  })
+
+trinity
+  .command('trade create', 'Create a new order on KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.create(self, args, cb)
+  })
+
+trinity
+  .command('trade cancel', 'Cancel an order on KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.cancel(self, args, cb)
+  })
+
+trinity
+  .command('trade withdraw', 'Withdraw funds from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.withdraw(self, args, cb)
   })
 
 trinity
@@ -285,6 +381,8 @@ function updateCheck(trinity, notifier) {
 
 wallet.updateBalances(trinity)
 var trinityLoop = setInterval(() => {
+  tokens.update(trinity)
   wallet.updateBalances(trinity)
   wallet.updateClaimables(trinity)
+  updateCheck(trinity, notifier)
 }, 5000)
