@@ -268,6 +268,14 @@ trinity
   })
 
 trinity
+  .command('trade cancel', 'Cancel an order on KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.cancel(self, args, cb)
+  })
+
+trinity
   .command('version', 'Show Trinity version information.')
   .help(commandHelp)
   .action(function (args, cb) {
