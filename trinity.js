@@ -268,6 +268,14 @@ trinity
   })
 
 trinity
+  .command('trade create', 'Create a new order on KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.create(self, args, cb)
+  })
+
+trinity
   .command('trade cancel', 'Cancel an order on KuCoin.')
   .help(commandHelp)
   .action(function (args, cb) {
