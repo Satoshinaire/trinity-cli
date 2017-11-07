@@ -24,6 +24,7 @@
     "axios": "^0.17.0",
     "chalk": "^2.1.0",
     "configstore": "^3.1.1",
+    "kucoin-api": "^0.0.3",
     "moment": "^2.19.1",
     "neon-js": "git+https://github.com/CityOfZion/neon-js.git#8aac855f7f479d730d49ee68ea8a2ae7620c4333",
     "node-hid": "^0.5.7",

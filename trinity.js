@@ -2,6 +2,8 @@
 
 'use strict'
 
+process.env.TRINITY_STATE = '{}'
+
 const pkg = require('./package.json')
 const Configstore = require('configstore')
 const defaultConfig = require('./defaultConfig')
@@ -9,6 +11,7 @@ const Vorpal = require('vorpal')
 const chalk = Vorpal().chalk
 const os = require('os')
 const fs = require('fs')
+const Kucoin = require('kucoin-api')
 
 const logdir = os.homedir() + '/.trinity/'
 
@@ -35,11 +38,13 @@ winston
   })
   .remove(winston.transports.Console)
 
+const g = require('./lib/global')
 const wallet = require('./lib/wallet')
 const tokens = require('./lib/tokens')
 const transactions = require('./lib/transactions')
 const network = require('./lib/network')
 const contacts = require('./lib/contacts')
+const trade = require('./lib/trade')
 const matrix = require('./lib/matrix')
 
 const conf = new Configstore(pkg.name, defaultConfig)
@@ -225,6 +230,65 @@ trinity
   .action(function (args, cb) {
     let self = this
     network.set(self, args, cb)
+  })
+
+trinity
+  .command('trade', 'Configure, lock, or unlock your KuCoin API credentials for trading.')
+  .option('-c, --configure', 'Configure your KuCoin API credentials.')
+  .option('-u, --unlock', 'Unlock your KuCoin API credentials for this Trinity session.')
+  .option('-l, --lock', 'Lock your KuCoin API credentials for this Trinity session.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    if (args.options.unlock) {
+      trade.unlock(self, args, cb)
+    } else if (args.options.lock) {
+      trade.lock(self, args, cb)
+    } else if (args.options.configure) {
+      trade.config(self, args, cb)
+    } else {
+      trade.state(self, args, cb)
+    }
+  })
+
+trinity
+  .command('trade balance', 'Get trading balance from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.balance(self, args, cb)
+  })
+
+trinity
+  .command('trade orders', 'Get current active orders from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.orders(self, args, cb)
+  })
+
+trinity
+  .command('trade create', 'Create a new order on KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.create(self, args, cb)
+  })
+
+trinity
+  .command('trade cancel', 'Cancel an order on KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.cancel(self, args, cb)
+  })
+
+trinity
+  .command('trade withdraw', 'Withdraw funds from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.withdraw(self, args, cb)
   })
 
 trinity
