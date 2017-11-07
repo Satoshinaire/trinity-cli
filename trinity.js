@@ -284,6 +284,14 @@ trinity
   })
 
 trinity
+  .command('trade withdraw', 'Withdraw funds from KuCoin.')
+  .help(commandHelp)
+  .action(function (args, cb) {
+    let self = this
+    trade.withdraw(self, args, cb)
+  })
+
+trinity
   .command('version', 'Show Trinity version information.')
   .help(commandHelp)
   .action(function (args, cb) {
