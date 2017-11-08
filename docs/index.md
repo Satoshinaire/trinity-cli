@@ -8,13 +8,38 @@ Trinity is a command-line wallet for the NEO Network written in Node.js and dist
 
 ## Overview
 
+_This wallet is still being thoroughly tested, please DO NOT use on mainnet._
+
 ### What does it currently do
 
-- Very basic Wallet functionality (Not fully tested, please _do not_ use on mainnet)
+- Wallet functionality
+  - Create address / private key pairs
+  - Import private key
+  - NEP-2 support
+  - Display balances
+  - Display transaction details from Neoscan blockchain explorer
+  - Monitor multiple addresses
+  - Send NEO
+  - Send GAS
+  - Claim GAS
+- Contact list management
+- Ledger Nano S support (watch-only)
+- Trade GAS for NEO on [KuCoin](https://www.kucoin.com/#/trade/GAS-NEO) exchange
+- View balances of NEP-5 tokens, such as RPX
 
 ### What will it do
 
-- Feature-complete light Wallet
+- Full support for Ledger Nano S
+- Full support for NEP-5 tokens
+- Generation of cold storage wallet
+- Adding watch-only addresses
+- Display current USD and BTC equivalent values for GAS and NEO
+
+### Known issues
+
+- Due to the way configuration is stored, sometimes configurations aren't saved first try and need to be tried again. Fix coming soon for this.
+- Can be difficult to cancel an action once started. Currently best approach is to deliberately enter invalid information to throw an error.
+- On slower machines some of the encryption / decryption can take a little while, and there's no nice visual indicator something is happening. Coming!
 
 ### Get help or give help
 
@@ -78,4 +103,4 @@ Trinity works like a command-prompt, just type `help` to get started:
 
 ## Donations
 
-Accepted at __AWcAwoXK6gbMUTojHMHEx8FgEfaVK9Hz5s__
+Accepted at __AeqoGrirm7khpRVTJvisi8EugfYYmbB6xD__
