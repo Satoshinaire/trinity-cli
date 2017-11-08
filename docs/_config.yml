@@ -2,7 +2,7 @@
 title: "Trinity"
 bye_message: "Follow the white rabbit."
 baseurl: "/trinity-cli/"
-url: "http://127.0.0.1"
+url: "http://www.satoshinaire.com"
 #disqus: satoshinaire
 
 # Header settings
@@ -14,7 +14,7 @@ source_code:
     server: "github.com"
     nick: "Satoshinaire"
 blog:
-    server: "wordpress.com"
+    server: "twitter.com"
     nick: "satoshinaire"
 fingerprint_key: "2A57 9F61 4B61 FF86 7FA9  9A1B 0D3F A8DD 52BB 3378"
 
