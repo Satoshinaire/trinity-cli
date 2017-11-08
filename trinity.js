@@ -39,6 +39,9 @@ winston
   .remove(winston.transports.Console)
 
 const g = require('./lib/global')
+const conf = new Configstore(pkg.name, defaultConfig)
+g.set('conf', conf.get())
+
 const wallet = require('./lib/wallet')
 const tokens = require('./lib/tokens')
 const transactions = require('./lib/transactions')
@@ -47,12 +50,23 @@ const contacts = require('./lib/contacts')
 const trade = require('./lib/trade')
 const matrix = require('./lib/matrix')
 
-const conf = new Configstore(pkg.name, defaultConfig)
-
 const trinity = Vorpal()
   .delimiter(chalk.dim.green('[' + network.get() + '] ') + chalk.green('trinity') + chalk.green(' >'))
   .history('trinity-command-history')
   .show()
+
+const exitCmd = trinity.find('exit')
+if (exitCmd) {
+  exitCmd.remove()
+}
+
+trinity
+  .command('exit')
+  .action(function (args, cb) {
+    let self = this
+    conf.set(g.get('conf'))
+    process.exit()
+  })
 
 trinity.help(() => {
   let result = ''
@@ -381,6 +395,7 @@ function updateCheck(trinity, notifier) {
 
 wallet.updateBalances(trinity)
 var trinityLoop = setInterval(() => {
+  conf.set(g.get('conf'))
   tokens.update(trinity)
   wallet.updateBalances(trinity)
   wallet.updateClaimables(trinity)
