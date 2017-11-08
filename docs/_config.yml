@@ -1,9 +1,9 @@
 # Site settings
-title: "trinity"
+title: "Trinity"
 bye_message: "Follow the white rabbit."
 baseurl: "/trinity-cli/"
 url: "http://127.0.0.1"
-#disqus: gjuniioor
+#disqus: satoshinaire
 
 # Header settings
 nick: "Satoshinaire"
