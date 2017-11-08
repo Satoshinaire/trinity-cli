@@ -2,9 +2,9 @@
 layout: content
 ---
 
-# Clyell
+# Trinity
 
-[https://gjuniioor.github.io/clyell](https://gjuniioor.github.io/clyell)
+[http://www.satoshinaire.com/trinity-cli](http://www.satoshinaire.com/trinity-cli)
 
 ### About
 

@@ -1,22 +1,22 @@
 # Site settings
-title: "gjuniioor"
-bye_message: "Thx!"
-baseurl: "/clyell/"
-url: "https://gjuniioor.github.io"
-disqus: gjuniioor
+title: "trinity"
+bye_message: "Follow the white rabbit."
+baseurl: "/trinity-cli/"
+url: "http://127.0.0.1"
+#disqus: gjuniioor
 
 # Header settings
-nick: "gjuniioor"
-mail:
-    domain: "protonmail"
-    ext: "ch"
+nick: "Satoshinaire"
+#mail:
+#    domain: "protonmail"
+#    ext: "ch"
 source_code:
     server: "github.com"
-    nick: "gjuniioor"
+    nick: "Satoshinaire"
 blog:
     server: "wordpress.com"
-    nick: "gjuniioor"
-fingerprint_key: "5E12 9ABC C2A9 564B C048  2DF9 D327 0D10 BC71 CF75"
+    nick: "satoshinaire"
+fingerprint_key: "2A57 9F61 4B61 FF86 7FA9  9A1B 0D3F A8DD 52BB 3378"
 
 # Build settings
 markdown: kramdown
