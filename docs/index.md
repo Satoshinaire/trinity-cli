@@ -2,8 +2,6 @@
 layout: content
 ---
 
-# Trinity
-
 Trinity is a command-line wallet for the NEO Network written in Node.js and distributed via npm.
 
 ## Overview
