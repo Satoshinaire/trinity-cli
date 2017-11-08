@@ -6,7 +6,7 @@ Trinity is a command-line wallet for the NEO Network written in Node.js and dist
 
 ## Overview
 
-_This wallet is still being thoroughly tested, please DO NOT use on mainnet._
+<p style="color: #dc0000;"><strong><em>This wallet is still being thoroughly tested, if you use on MainNet, you do so at your own risk.</em></strong></p>
 
 ### What does it currently do
 
