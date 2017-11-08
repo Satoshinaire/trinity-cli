@@ -1,0 +1,25 @@
+---
+layout: page
+---
+
+<div class="post">
+
+  <header class="post-header">
+    <p class="meta">
+      {{ page.date | date: "%b %-d, %Y" }} {% if page.author %} • {{ page.author }}{% endif %} {% if page.meta %} • {{ page.meta }}{% endif %} • {% for category in page.tags %}<span><a href="{{ site.baseurl }}category/#{{ category }}" class="reserved">{{ category }}</a>{% if forloop.last != true %},{% endif %}</span>{% endfor %}
+    </p>
+  </header>
+
+  <article class="post-content">
+    {{ content }}
+  </article>
+
+  <p class="feed-recomendation">
+    Was this post useful? Subscribe to the <a href="{{ site.baseurl }}feed/">feed</a> to receive future posts!
+  </p>
+
+  {% comment %}
+  {% include disqus.html %}
+  {% endcomment %}
+
+</div>

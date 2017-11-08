@@ -1,18 +1,12 @@
-<p align="center">
-  <img
-    src="https://user-images.githubusercontent.com/30309816/31295829-c8d25310-ab2b-11e7-8885-fb335d0c3baf.png"
-    width="125px;">
-</p>
+---
+layout: content
+---
 
-<h1 align="center">Trinity</h1>
-
-<p align="center">
-  Trinity is a command-line wallet for the NEO Network written in Node.js and distributed via npm.
-</p>
+Trinity is a command-line wallet for the NEO Network written in Node.js and distributed via npm.
 
 ## Overview
 
-_This wallet is still being thoroughly tested, please DO NOT use on mainnet._
+<p style="color: #dc0000;"><strong><em>This wallet is still being thoroughly tested, if you use on MainNet, you do so at your own risk.</em></strong></p>
 
 ### What does it currently do
 

@@ -1,0 +1,23 @@
+# Site settings
+title: "Trinity"
+bye_message: "Follow the white rabbit."
+baseurl: "/trinity-cli/"
+url: "http://www.satoshinaire.com"
+#disqus: satoshinaire
+
+# Header settings
+nick: "Satoshinaire"
+#mail:
+#    domain: "protonmail"
+#    ext: "ch"
+source_code:
+    server: "github.com"
+    nick: "Satoshinaire"
+blog:
+    server: "twitter.com"
+    nick: "satoshinaire"
+fingerprint_key: "2A57 9F61 4B61 FF86 7FA9  9A1B 0D3F A8DD 52BB 3378"
+
+# Build settings
+markdown: kramdown
+permalink: /:categories/:title/
