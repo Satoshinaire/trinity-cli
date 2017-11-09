@@ -22,6 +22,7 @@
   "dependencies": {
     "as-table": "^1.0.27",
     "axios": "^0.17.0",
+    "bluebird": "^3.5.1",
     "chalk": "^2.1.0",
     "configstore": "^3.1.1",
     "kucoin-api": "^0.0.3",

@@ -1,5 +1,5 @@
 const clients = require('restify-clients')
-const q = require('q')
+const Promise = require('bluebird')
 
 class Neoscan {
   constructor(network = 'MainNet') {
@@ -19,19 +19,19 @@ class Neoscan {
   }
 
   getInfo(type, hash) {
-    let deferred = q.defer()
-    let path = this.path_prefix + '/get_' + type + '/' + hash
-    this.client.get(path, function (err, req, res, obj) {
-      if (err) {
-        deferred.reject(err)
-      } else {
-        if (typeof obj == 'string') {
-          obj = JSON.parse(obj)
+    return new Promise((resolve, reject) => {
+      let path = this.path_prefix + '/get_' + type + '/' + hash
+      this.client.get(path, function (err, req, res, obj) {
+        if (err) {
+          reject(err)
+        } else {
+          if (typeof obj == 'string') {
+            obj = JSON.parse(obj)
+          }
+          resolve(obj)
         }
-        deferred.resolve(obj)
-      }
+      })
     })
-    return deferred.promise
   }
 
   getAddress(hash) {
